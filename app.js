@@ -3,9 +3,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+var cors = require("cors");
+
 require("dotenv").config();
 
 var app = express();
+
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -22,9 +26,5 @@ app.use("/api/user", userRouter);
 app.use("/api/experience", experienceRouter);
 app.use("/api/project", projectRouter);
 app.use("/api/achievement", achievementRouter);
-
-app.listen(process.env.PORT, "0.0.0.0", () => {
-  console.log(`Server started on port ${process.env.PORT}`);
-});
 
 module.exports = app;
