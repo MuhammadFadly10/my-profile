@@ -1,0 +1,61 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id        Int      @id @default(autoincrement())
+    name      String
+    email     String
+    password  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Experience {
+    id          Int      @id @default(autoincrement())
+    startDate   DateTime
+    endDate     DateTime
+    title       String
+    tag         String?
+    description String
+    jobs        String[]
+    techStack   String[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Project {
+    id          Int      @id @default(autoincrement())
+    language    String
+    title       String
+    stack       String
+    description String
+    imageUrl    String?
+    public_id   String?
+    github      String?
+    url         String?
+    techStack   String[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Achievement {
+    id        Int         @id @default(autoincrement())
+    title     String
+    type      Certificate
+    imageUrl  String?
+    public_id String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+enum Certificate {
+    achievement
+    education
+}
