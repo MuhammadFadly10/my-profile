@@ -6,16 +6,10 @@ module.exports = {
     const { startDate, endDate, title, description, tag, jobs, techStack } =
       req.body;
 
-    const date = new Date();
-
-    const formatStartDate = moment(startDate).format("DD-MM-YYYY");
-    const formatEndDate = moment(endDate).format("DD-MM-YYYY");
-    const isoString = date.toISOString(formatStartDate, formatEndDate); // karena format prisma menggunakan isoString 86-01
-
     const result = await prisma.experience.create({
       data: {
-        startDate: isoString,
-        endDate: isoString,
+        startDate,
+        endDate,
         title,
         description,
         tag,
